@@ -68,10 +68,10 @@ class IndexController extends AbstractActionController
 
     public function updateAction()
     {
-        $form           = new NavigationForm();
-        $navigationItem = $this->params()->fromRoute('id', null );
-        $navigation     = $this->entityManager->getRepository(Navigation::class )
-            ->findOneById($navigationItem);
+        $form         = new NavigationForm();
+        $navigationId = $this->params()->fromRoute('id', null );
+        $navigation   = $this->entityManager->getRepository(Navigation::class )
+            ->findOneById($navigationId);
 
         if( is_null($navigation) )
         {
@@ -111,6 +111,18 @@ class IndexController extends AbstractActionController
 
     public function deleteAction()
     {
+        $navigationId = $this->params()->fromRoute('id', null );
+        $navigation   = $this->entityManager->getRepository(Navigation::class )
+            ->findOneById($navigationId);
 
+        if( is_null($navigation) )
+        {
+            $this->getResponse()->setStatusCode(404);
+            return;
+        }
+
+        $this->navigationManager->deleteNavigation($navigation);
+
+        return $this->redirect()->toRoute('navigation' );
     }
 }

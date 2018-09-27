@@ -2,7 +2,7 @@
 
 <table class="table table-condensed">
     <caption>
-        <a href="<?= $this->url('navigation', ['action' => 'create']); ?>" class="btn btn-xs btn-primary" id="add-button">
+        <a href="<?= $this->url('navigation', ['action' => 'create']); ?>" class="btn btn-success" id="add-button">
             <span class="glyphicon glyphicon-plus"></span> Add new Navigation item
         </a>
     </caption>
@@ -13,7 +13,7 @@
             <th>Link</th>
             <th>Parent</th>
             <th>Status</th>
-            <th>Action</th>
+            <th class="text-right">Action</th>
         </tr>
     </thead>
 
@@ -25,12 +25,12 @@
             <td><em><?= $this->escapeHtml($navigation->getLink()); ?></em></td>
             <td><?= ($navigation->getParentId()) ? $this->escapeHtml($navigation->getParentId()) : '---'; ?></td>
             <td><?= $this->escapeHtml($navigation->getStatus()); ?></td>
-            <th>
-                <button class="btn btn-xs btn-danger" id="delete-button">
+            <th class="text-right">
+                <a href="<?= $this->url('navigation', ['action' => 'delete', 'id' => $this->escapeHtml($navigation->getId())]); ?>" class="btn btn-xs btn-danger" id="delete-button">
                     <span class="glyphicon glyphicon-trash"></span> Delete
-                </button>
+                </a>
                 <a href="<?= $this->url('navigation', ['action' => 'update', 'id' => $this->escapeHtml($navigation->getId())]); ?>" class="btn btn-xs btn-primary" id="update-button">
-                    <span class="glyphicon glyphicon-edit"></span> Edit
+                    <span class="glyphicon glyphicon-pencil"></span> Edit
                 </a>
             </th>
         </tr>

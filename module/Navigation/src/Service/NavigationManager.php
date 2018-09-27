@@ -46,8 +46,9 @@ class NavigationManager
         $this->entityManager->flush();
     }
 
-    public function deleteNavigation()
+    public function deleteNavigation( $navigation )
     {
-
+        $this->entityManager->remove($navigation);
+        $this->entityManager->flush();
     }
 }
