@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Class Navigation
  * @ORM\Entity
- * @ORM\Table(name='navigation')
+ * @ORM\Table(name="navigation")
  */
 class Navigation
 {
@@ -17,32 +17,32 @@ class Navigation
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
-     * @ORM\Column(name='id')
+     * @ORM\Column(name="id")
      */
     protected $id;
 
     /**
-     * @ORM\Column(name='title')
+     * @ORM\Column(name="title")
      */
     protected $title;
 
     /**
-     * @ORM\Column(name='link')
+     * @ORM\Column(name="link")
      */
     protected $link;
 
     /**
-     * @ORM\Column(name='parent_id')
+     * @ORM\Column(name="parent_id", nullable=true)
      */
     protected $parentId;
 
     /**
-     * @ORM\Column(name='order_id')
+     * @ORM\Column(name="order_id")
      */
     protected $orderId;
 
     /**
-     * @ORM\Column(name='status')
+     * @ORM\Column(name="status")
      */
     protected $status;
 

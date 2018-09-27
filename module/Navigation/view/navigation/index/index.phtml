@@ -1,1 +1,39 @@
 <h1>Navigation page view</h1>
+
+<table class="table table-condensed">
+    <caption>
+        <a href="<?= $this->url('navigation', ['action' => 'create']); ?>" class="btn btn-xs btn-primary" id="add-button">
+            <span class="glyphicon glyphicon-plus"></span> Add new Navigation item
+        </a>
+    </caption>
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Link</th>
+            <th>Parent</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    <?php foreach($navigations as $navigation): ?>
+        <tr>
+            <td><?= $this->escapeHtml($navigation->getId()); ?></td>
+            <td><strong><?= $this->escapeHtml($navigation->getTitle()); ?></strong></td>
+            <td><em><?= $this->escapeHtml($navigation->getLink()); ?></em></td>
+            <td><?= ($navigation->getParentId()) ? $this->escapeHtml($navigation->getParentId()) : '---'; ?></td>
+            <td><?= $this->escapeHtml($navigation->getStatus()); ?></td>
+            <th>
+                <button class="btn btn-xs btn-danger" id="delete-button">
+                    <span class="glyphicon glyphicon-trash"></span> Delete
+                </button>
+                <a href="<?= $this->url('navigation', ['action' => 'update']); ?>" class="btn btn-xs btn-primary" id="update-button">
+                    <span class="glyphicon glyphicon-edit"></span> Edit
+                </a>
+            </th>
+        </tr>
+    <?php endforeach; ?>
+    </tbody>
+</table>

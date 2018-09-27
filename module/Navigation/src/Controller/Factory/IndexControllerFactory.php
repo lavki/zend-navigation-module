@@ -2,6 +2,7 @@
 
 namespace Navigation\Controller\Factory;
 
+use Navigation\Service\NavigationManager;
 use Interop\Container\ContainerInterface;
 use Navigation\Controller\IndexController;
 use Zend\ServiceManager\Factory\FactoryInterface;
@@ -13,6 +14,9 @@ class IndexControllerFactory implements FactoryInterface
 {
     public function __invoke( ContainerInterface $container, $requestedName, array $options = null )
     {
-        return new IndexController();
+        $entityManager     = $container->get('doctrine.entitymanager.orm_default');
+        $navigationManager = $container->get(NavigationManager::class);
+
+        return new IndexController( $entityManager, $navigationManager );
     }
 }

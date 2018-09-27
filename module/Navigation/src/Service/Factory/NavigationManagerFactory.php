@@ -9,7 +9,7 @@ use Interop\Container\Exception\ContainerException;
 use Zend\ServiceManager\Exception\ServiceNotFoundException;
 use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 
-class IndexControllerFactory implements FactoryInterface
+class NavigationManagerFactory implements FactoryInterface
 {
     public function __invoke( ContainerInterface $container, $requestedName, array $options = null )
     {

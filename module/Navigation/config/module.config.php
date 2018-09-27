@@ -2,9 +2,42 @@
 
 namespace Navigation;
 
+use Zend\Router\Http\Segment;
+use Navigation\Controller\IndexController;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 
 return [
+    'controllers' => [
+        'factories' => [
+            Controller\IndexController::class => Controller\Factory\IndexControllerFactory::class,
+        ],
+    ],
+
+    'service_manager' => [
+        'factories' => [
+            Service\NavigationManager::class => Service\Factory\NavigationManagerFactory::class,
+        ],
+    ],
+
+    'router' => [
+        'routes' => [
+            'navigation' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route' => '/navigation[/:action[/:item]]',
+                    'constraints' => [
+                        'action' => '[a-z]*',
+                        'item'   => '[a-z0-9-]*',
+                    ],
+                    'defaults' => [
+                        'controller' => IndexController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
+        ],
+    ],
+
     'view_manager' => [
         'template_path_stack' => [
             __DIR__ . '/../view',
