@@ -35,9 +35,15 @@ class NavigationManager
         $this->entityManager->flush();
     }
 
-    public function updateNavigation()
+    public function updateNavigation( $navigation, $data )
     {
+        $navigation->setTitle($data['title']);
+        $navigation->setLink($data['link']);
+        //$navigation->setParentId($data['parentId']);
+        //$navigation->setOrderId($data['orderId']);
+        $navigation->setStatus($data['status']);
 
+        $this->entityManager->flush();
     }
 
     public function deleteNavigation()

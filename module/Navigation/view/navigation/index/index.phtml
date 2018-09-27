@@ -29,7 +29,7 @@
                 <button class="btn btn-xs btn-danger" id="delete-button">
                     <span class="glyphicon glyphicon-trash"></span> Delete
                 </button>
-                <a href="<?= $this->url('navigation', ['action' => 'update']); ?>" class="btn btn-xs btn-primary" id="update-button">
+                <a href="<?= $this->url('navigation', ['action' => 'update', 'id' => $this->escapeHtml($navigation->getId())]); ?>" class="btn btn-xs btn-primary" id="update-button">
                     <span class="glyphicon glyphicon-edit"></span> Edit
                 </a>
             </th>

@@ -24,10 +24,10 @@ return [
             'navigation' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route' => '/navigation[/:action[/:item]]',
+                    'route' => '/navigation[/:action[/:id]]',
                     'constraints' => [
                         'action' => '[a-z]*',
-                        'item'   => '[a-z0-9-]*',
+                        'id'     => '[\d]+',
                     ],
                     'defaults' => [
                         'controller' => IndexController::class,

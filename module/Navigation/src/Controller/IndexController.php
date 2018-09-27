@@ -68,7 +68,45 @@ class IndexController extends AbstractActionController
 
     public function updateAction()
     {
+        $form           = new NavigationForm();
+        $navigationItem = $this->params()->fromRoute('id', null );
+        $navigation     = $this->entityManager->getRepository(Navigation::class )
+            ->findOneById($navigationItem);
 
+        if( is_null($navigation) )
+        {
+            $this->getResponse()->setStatusCode(404);
+            return;
+        }
+
+        if( $this->getRequest()->isPost() )
+        {
+            $data = $this->params()->fromPost();
+            $form->setData($data);
+
+            if( $form->isValid() )
+            {
+                $data = $form->getData();
+                $this->navigationManager->updateNavigation($navigation, $data);
+
+                return $this->redirect()->toRoute('navigation' );
+            }
+        }
+
+        else
+        {
+            $data = [
+                'title'  => $navigation->getTitle(),
+                'link'   => $navigation->getLink(),
+                'status' => $navigation->getStatus(),
+            ];
+
+            $form->setData($data);
+        }
+
+        return new ViewModel([
+            'form' => $form,
+        ]);
     }
 
     public function deleteAction()

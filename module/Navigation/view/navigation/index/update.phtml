@@ -1,0 +1,41 @@
+<?php
+
+$title = 'Update an existing Navigation item';
+
+$this->headTitle($title);
+
+$form = $this->form;
+$form->get('submit')->setAttributes(['class'=>'btn btn-primary']);
+$form->prepare();
+
+?>
+<h1><?= $title; ?></h1>
+
+<div class="row">
+    <div class="col-md-3">
+        <?= $this->form()->openTag($form); ?>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('title')); ?>
+            <?= $this->formElement($form->get('title')); ?>
+            <?= $this->formElementErrors($form->get('title')); ?>
+        </div><!-- /.form-group -->
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('link')); ?>
+            <?= $this->formElement($form->get('link')); ?>
+            <?= $this->formElementErrors($form->get('link')); ?>
+        </div><!-- /.form-group -->
+
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('status')); ?>
+            <?= $this->formElement($form->get('status')); ?>
+            <?= $this->formElementErrors($form->get('status')); ?>
+        </div><!-- /.form-group -->
+
+        <?= $this->formElement($form->get('submit')); ?>
+
+        <?= $this->form()->closeTag(); ?>
+    </div><!-- /.col-md-3 -->
+</div><!-- /.row -->
