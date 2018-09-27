@@ -11,9 +11,14 @@ use Navigation\Entity\Navigation;
 
 class NavigationForm extends Form
 {
-    public function __construct( $name = null, array $options = [] )
+    /**
+     * NavigationForm constructor.
+     * @param null $name
+     * @param array $options
+     */
+    public function __construct()
     {
-        parent::__construct( $name, $options );
+        parent::__construct( 'navigation-form' );
 
         $this->addElements();       // add all elements of needed
         $this->addInputFilter();    // filtering and validating data
@@ -28,10 +33,10 @@ class NavigationForm extends Form
             'attributes' => [
                 'id'          => 'title',
                 'class'       => 'form-control',
-                'placeholder' => 'Главная',
+                'placeholder' => 'Home',
             ],
             'options' => [
-                'label' => 'Название страницы меню',
+                'label' => 'Name:',
             ],
         ]);
 
@@ -45,10 +50,11 @@ class NavigationForm extends Form
                 'placeholder' => 'link',
             ],
             'options' => [
-                'label' => 'Ссылка на страницу',
+                'label' => 'Link:',
             ],
         ]);
 
+        /*
         // Adding field 'parentId'
         $this->add([
             'type'       => Element\Select::class,
@@ -59,12 +65,11 @@ class NavigationForm extends Form
                 'placeholder' => 'link',
             ],
             'options' => [
-                'label' => 'Ссылка на страницу',
+                'label' => 'Parent item:',
             ],
         ]);
 
         // Adding field "orderId"
-        /*
         $this->add([
             'type'       => Element\Select::class,
             'name'       => 'orderId',
@@ -87,10 +92,10 @@ class NavigationForm extends Form
                 'class'       => 'form-control',
             ],
             'options' => [
-                'label' => '-- статус меню --',
+                'label' => 'Status:',
                 'value_options' => [
-                    Navigation::VISIBLE   => 'Открыто',
-                    Navigation::INVISIBLE => 'Скрыто'
+                    Navigation::VISIBLE   => 'Visible',
+                    Navigation::INVISIBLE => 'Invisible'
                 ],
             ],
         ]);
@@ -98,9 +103,9 @@ class NavigationForm extends Form
         // Adding 'submit' button
         $this->add([
             'type'  => Element\Submit::class,
-            'name' => 'submit',
+            'name'  => 'submit',
             'attributes' => [
-                'value' => 'Создать',
+                'value' => 'Create',
                 'id'    => 'submit',
             ],
         ]);
@@ -151,7 +156,7 @@ class NavigationForm extends Form
             'required'   => true,
             'validators' => [
                 [
-                    'name' => Validator\InArray::class,
+                    'name'   => Validator\InArray::class,
                     'options'=> [
                         'haystack' => [Navigation::VISIBLE, Navigation::INVISIBLE],
                     ]

@@ -5,6 +5,7 @@ namespace Navigation\Controller;
 use Zend\View\Model\ViewModel;
 use Doctrine\ORM\EntityManager;
 use Navigation\Entity\Navigation;
+use Navigation\Form\NavigationForm;
 use Navigation\Service\NavigationManager;
 use Zend\Mvc\Controller\AbstractActionController;
 
@@ -20,6 +21,11 @@ class IndexController extends AbstractActionController
      */
     private $navigationManager;
 
+    /**
+     * IndexController constructor.
+     * @param EntityManager $entityManager
+     * @param NavigationManager $navigation
+     */
     public function __construct( EntityManager $entityManager, NavigationManager $navigation )
     {
         $this->entityManager     = $entityManager;
@@ -38,7 +44,26 @@ class IndexController extends AbstractActionController
 
     public function createAction()
     {
+        $form = new NavigationForm();
 
+        if( $this->getRequest()->isPost() )
+        {
+            $data = $this->params()->fromPost();
+            $form->setData($data);
+
+            if( $form->isValid() )
+            {
+                $data = $form->getData();
+
+                $this->navigationManager->createNavigation($data);
+
+                return $this->redirect()->toRoute('navigation' );
+            }
+        }
+
+        return new ViewModel([
+            'form' => $form
+        ]);
     }
 
     public function updateAction()

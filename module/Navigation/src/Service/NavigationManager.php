@@ -27,8 +27,8 @@ class NavigationManager
 
         $navigation->setTitle($data['title']);
         $navigation->setLink($data['link']);
-        $navigation->setParentId($data['parentId']);
-        $navigation->setOrderId($data['orderId']);
+        //$navigation->setParentId($data['parentId']);
+        //$navigation->setOrderId($data['orderId']);
         $navigation->setStatus($data['status']);
 
         $this->entityManager->persist($navigation);
